@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_twitter_web/providers/auth_provider.dart';
 import 'package:flutter_twitter_web/router/router.dart';
 import 'package:flutter_twitter_web/ui/buttons/link_text.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ import '../inputs/custom_inputs.dart';
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     return ChangeNotifierProvider(
         create: (_) => LoginFormProvider(),
         child: Builder(builder: (context) {
@@ -59,7 +62,11 @@ class LoginView extends StatelessWidget {
                         SizedBox(height: 20),
                         CustomOutlinedButton(
                             onPressed: () {
-                              loginFormProvider.validateForm();
+                              final isValid = loginFormProvider.validateForm();
+                              if (isValid) {
+                                authProvider.login(loginFormProvider.email,
+                                    loginFormProvider.password);
+                              }
                             },
                             text: 'Ingresar'),
                         SizedBox(height: 20),

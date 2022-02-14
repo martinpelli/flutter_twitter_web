@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_twitter_web/providers/auth_provider.dart';
 
 class LoginFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -6,7 +7,11 @@ class LoginFormProvider extends ChangeNotifier {
   String email = '';
   String password = '';
 
-  validateForm() {
-    formKey.currentState!.validate();
+  bool validateForm() {
+    if (formKey.currentState!.validate()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
