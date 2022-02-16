@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_twitter_web/ui/shared/sidebar.dart';
+import '../../shared/navbar.dart';
+
 class DashboardLayout extends StatelessWidget {
   final Widget child;
 
@@ -8,17 +11,13 @@ class DashboardLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Dashboard',
-            style: TextStyle(fontSize: 50),
-          ),
-          Expanded(child: child)
-        ],
-      )),
-    );
+        backgroundColor: Color(0xffEDF1F2),
+        body: Row(
+          children: [
+            Sidebar(),
+            Expanded(
+                child: Column(children: [Navbar(), Expanded(child: child)]))
+          ],
+        ));
   }
 }
