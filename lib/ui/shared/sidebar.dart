@@ -4,6 +4,8 @@ import 'package:flutter_twitter_web/ui/shared/widgets/logo.dart';
 import 'package:flutter_twitter_web/ui/shared/widgets/menu_item.dart';
 import 'package:flutter_twitter_web/ui/shared/widgets/text_separator.dart';
 
+import '../../providers/sidemenu_provider.dart';
+
 class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class Sidebar extends StatelessWidget {
           MenuItem(
               text: 'Dashboard',
               icon: Icons.compass_calibration_outlined,
-              onPressed: () => {}),
+              onPressed: () => {SideMenuProvider.closeMenu()}),
           MenuItem(
               text: 'Orders',
               icon: Icons.shopping_cart_outlined,
