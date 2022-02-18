@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_twitter_web/providers/sidemenu_provider.dart';
 import 'package:flutter_twitter_web/ui/layouts/dashboard/dashboard_layout.dart';
 import 'package:flutter_twitter_web/ui/layouts/splash/splash_layout.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,11 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: false)
+        ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: false),
+        ChangeNotifierProvider(
+          create: (_) => SideMenuProvider(),
+          lazy: false,
+        )
       ],
       child: MyApp(),
     );

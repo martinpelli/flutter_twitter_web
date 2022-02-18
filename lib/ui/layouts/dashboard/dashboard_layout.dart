@@ -33,8 +33,14 @@ class _DashboardLayoutState extends State<DashboardLayout>
               children: [
                 if (size.width >= 700) Sidebar(),
                 Expanded(
-                    child: Column(
-                        children: [Navbar(), Expanded(child: widget.child)]))
+                    child: Column(children: [
+                  Navbar(),
+                  Expanded(
+                      child: Padding(
+                          child: widget.child,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10)))
+                ]))
               ],
             ),
             if (size.width < 700)
