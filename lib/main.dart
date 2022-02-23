@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_web/providers/sidemenu_provider.dart';
-import 'package:flutter_twitter_web/ui/layouts/dashboard/dashboard_layout.dart';
-import 'package:flutter_twitter_web/ui/layouts/splash/splash_layout.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_twitter_web/api/CafeApi.dart';
+
+import 'package:flutter_twitter_web/ui/layouts/dashboard/dashboard_layout.dart';
+import 'package:flutter_twitter_web/ui/layouts/splash/splash_layout.dart';
+
 import 'package:flutter_twitter_web/router/router.dart';
+
 import 'package:flutter_twitter_web/providers/auth_provider.dart';
+import 'package:flutter_twitter_web/providers/sidemenu_provider.dart';
 
 import 'package:flutter_twitter_web/services/local_storage.dart';
 import 'package:flutter_twitter_web/services/navigation_services.dart';
+import 'package:flutter_twitter_web/services/notifications_service.dart';
 
 import 'package:flutter_twitter_web/ui/layouts/auth/auth_layout.dart';
 
 void main() async {
   await LocalStorage.configurePrefs();
+  CafeApi.configureDio();
   Flurorouter.configureRoutes();
   runApp(AppState());
 }
@@ -43,6 +49,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: Flurorouter.router.generator,
       navigatorKey: NavigationService.navigatorKey,
+      scaffoldMessengerKey: NotificationsService.messengerKey,
       builder: (_, child) {
         final authProvider = Provider.of<AuthProvider>(context);
 

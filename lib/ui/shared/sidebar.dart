@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_twitter_web/providers/auth_provider.dart';
 import 'package:flutter_twitter_web/router/router.dart';
 import 'package:flutter_twitter_web/services/navigation_services.dart';
 import '../../providers/sidemenu_provider.dart';
@@ -83,7 +84,9 @@ class Sidebar extends StatelessWidget {
           MenuItem(
               text: 'Logout',
               icon: Icons.exit_to_app_outlined,
-              onPressed: () => {}),
+              onPressed: () {
+                Provider.of<AuthProvider>(context, listen: false).logout();
+              }),
         ],
       ),
     );

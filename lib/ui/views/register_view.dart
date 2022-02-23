@@ -1,12 +1,17 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_web/providers/regiter_form_provider.dart';
-import 'package:flutter_twitter_web/router/router.dart';
-import 'package:flutter_twitter_web/ui/buttons/link_text.dart';
+
 import 'package:provider/provider.dart';
+
+import 'package:flutter_twitter_web/providers/auth_provider.dart';
+import 'package:flutter_twitter_web/providers/regiter_form_provider.dart';
+
+import 'package:email_validator/email_validator.dart';
+
+import 'package:flutter_twitter_web/router/router.dart';
 
 import '../buttons/custom_outlined_button.dart';
 import '../inputs/custom_inputs.dart';
+import 'package:flutter_twitter_web/ui/buttons/link_text.dart';
 
 class RegisterView extends StatelessWidget {
   @override
@@ -32,7 +37,7 @@ class RegisterView extends StatelessWidget {
                           onChanged: ((value) =>
                               registerFormProvider.name = value),
                           validator: ((value) {
-                            if (value == null || value!.isEmpty)
+                            if (value == null || value.isEmpty)
                               return 'Ingrese su nombre';
                             if (value.length < 5)
                               return 'El nombre debe ser mayor a cuatro caracteres';
@@ -63,7 +68,7 @@ class RegisterView extends StatelessWidget {
                           onChanged: ((value) =>
                               registerFormProvider.password = value),
                           validator: ((value) {
-                            if (value == null || value!.isEmpty)
+                            if (value == null || value.isEmpty)
                               return 'Ingrese su constraseña';
                             if (value.length < 7)
                               return 'La contraseña debe ser mayor a 6 caracteres';
@@ -77,7 +82,16 @@ class RegisterView extends StatelessWidget {
                         SizedBox(height: 20),
                         CustomOutlinedButton(
                             onPressed: () {
-                              registerFormProvider.validateForm();
+                              final validForm =
+                                  registerFormProvider.validateForm();
+                              if (!validForm) return;
+                              final authProvider = Provider.of<AuthProvider>(
+                                  context,
+                                  listen: false);
+                              authProvider.register(
+                                  registerFormProvider.email,
+                                  registerFormProvider.password,
+                                  registerFormProvider.name);
                             },
                             text: 'Crear cuenta'),
                         SizedBox(height: 20),
