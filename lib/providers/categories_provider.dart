@@ -15,4 +15,40 @@ class CategoriesProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future newCategory(String name) async {
+    final data = {'nombre': name};
+    try {
+      final json = await CafeApi.httpPost('/categorias', data);
+      final newCategory = Categoria.fromMap(json);
+
+      categorias.add(newCategory);
+      notifyListeners();
+    } catch (error) {
+      throw 'Error al crear la categoría';
+    }
+  }
+
+  Future updateCategory(String id, String name) async {
+    final data = {'nombre': name};
+    try {
+      await CafeApi.httpPut('/categorias/$id', data);
+      categorias = categorias.map((category) {
+        if (category.id != id) return category;
+        category.nombre = name;
+        return category;
+      }).toList();
+      notifyListeners();
+    } catch (error) {
+      throw 'Error al actualizar la categoría';
+    }
+  }
+
+  Future deleteCategory(String id) async {
+    try {
+      await CafeApi.httpDelete('/categorias/$id');
+      categorias.removeWhere((categoria) => categoria.id == id);
+      notifyListeners();
+    } catch (error) {}
+  }
 }

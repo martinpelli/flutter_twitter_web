@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_twitter_web/ui/modals/category_modal.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_twitter_web/providers/categories_provider.dart';
@@ -24,7 +25,10 @@ class _CategoriesViewState extends State<CategoriesView> {
 
   @override
   Widget build(BuildContext context) {
+    final categorias = Provider.of<CategoriesProvider>(context).categorias;
+
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListView(
         physics: ClampingScrollPhysics(),
         children: [
@@ -37,7 +41,7 @@ class _CategoriesViewState extends State<CategoriesView> {
               DataColumn(label: Text('Creado por')),
               DataColumn(label: Text('Acciones')),
             ],
-            source: CategoriesDTS(),
+            source: CategoriesDTS(categorias, context),
             header: Text('Categorías disponibles', maxLines: 2),
             onRowsPerPageChanged: (rows) {
               setState(() {
@@ -48,7 +52,12 @@ class _CategoriesViewState extends State<CategoriesView> {
             actions: [
               CustomIconButton(
                 icon: Icons.add_outlined,
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (_) => CategoryModal(category: null));
+                },
                 text: 'Crear',
               )
             ],
