@@ -6,6 +6,8 @@ import 'package:flutter_twitter_web/models/user.dart';
 class UsersProvider extends ChangeNotifier {
   List<Usuario> users = [];
   bool isLoading = true;
+  bool ascending = true;
+  int? sortColumnIndex;
 
   UsersProvider() {
     getPaginatedUsers();
@@ -17,6 +19,31 @@ class UsersProvider extends ChangeNotifier {
 
     users = [...usersResp.usuarios];
     isLoading = false;
+    notifyListeners();
+  }
+
+  Future<Usuario> getUserById(String uid) async {
+    try {
+      final response = await CafeApi.httpGet('/usuarios/$uid');
+      final user = Usuario.fromMap(response);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  void sort<T>(Comparable<T> Function(Usuario user) getField) {
+    users.sort((a, b) {
+      final aValue = getField(a);
+      final bValue = getField(b);
+
+      return ascending
+          ? Comparable.compare(aValue, bValue)
+          : Comparable.compare(bValue, aValue);
+    });
+
+    ascending = !ascending;
+
     notifyListeners();
   }
 }

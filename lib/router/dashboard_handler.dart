@@ -11,6 +11,7 @@ import 'package:flutter_twitter_web/ui/views/dashboard_view.dart';
 import 'package:flutter_twitter_web/ui/views/blank_view.dart';
 import 'package:flutter_twitter_web/ui/views/icons_view.dart';
 import '../ui/views/categories_view.dart';
+import '../ui/views/user_view.dart';
 import '../ui/views/users_view.dart';
 
 class DashboardHandlers {
@@ -61,6 +62,19 @@ class DashboardHandlers {
     if (authProvider.authStatus == AuthStatus.authenticated)
       return UsersView();
     else
+      return LoginView();
+  });
+
+  static Handler user = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.userRoute);
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      if (params['uid']?.first != null)
+        return UserView(uid: params['uid']!.first);
+      else
+        return UsersView();
+    } else
       return LoginView();
   });
 }
