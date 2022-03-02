@@ -66,13 +66,13 @@ class LoginView extends StatelessWidget {
                         SizedBox(height: 20),
                         CustomOutlinedButton(
                             onPressed: () =>
-                                {onFormSumbit(loginFormProvider, authProvider)},
+                                onFormSumbit(loginFormProvider, authProvider),
                             text: 'Ingresar'),
                         SizedBox(height: 20),
                         LinkText(
                           text: 'Nueva Cuenta',
                           onPressed: () {
-                            Navigator.pushNamed(
+                            Navigator.pushReplacementNamed(
                                 context, Flurorouter.registerRoute);
                           },
                         )

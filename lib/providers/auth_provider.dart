@@ -8,6 +8,8 @@ import 'package:flutter_twitter_web/services/navigation_services.dart';
 import 'package:flutter_twitter_web/router/router.dart';
 import 'package:flutter_twitter_web/services/notifications_service.dart';
 
+import '../models/user.dart';
+
 enum AuthStatus { checking, authenticated, notAuthenticated }
 
 class AuthProvider extends ChangeNotifier {

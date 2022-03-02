@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 class Sidebar extends StatelessWidget {
   void navigateTo(String routeName) {
-    NavigationService.navigateTo(routeName);
+    NavigationService.replaceTo(routeName);
     SideMenuProvider.closeMenu();
   }
 
@@ -58,9 +58,10 @@ class Sidebar extends StatelessWidget {
               icon: Icons.attach_money_outlined,
               onPressed: () => {}),
           MenuItem(
-              text: 'Customers',
+              isActive: sideMenuProvider.currentPage == Flurorouter.usersRoute,
+              text: 'Users',
               icon: Icons.people_alt_outlined,
-              onPressed: () => {}),
+              onPressed: () => navigateTo(Flurorouter.usersRoute)),
           SizedBox(height: 30),
           TextSeparator(text: 'UI Elements'),
           MenuItem(
@@ -80,7 +81,7 @@ class Sidebar extends StatelessWidget {
               isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
               text: 'Blank',
               icon: Icons.post_add_outlined,
-              onPressed: () => {navigateTo(Flurorouter.blankRoute)}),
+              onPressed: () => navigateTo(Flurorouter.blankRoute)),
           SizedBox(height: 30),
           TextSeparator(text: 'Exit'),
           MenuItem(

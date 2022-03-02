@@ -11,6 +11,7 @@ import 'package:flutter_twitter_web/router/router.dart';
 import 'package:flutter_twitter_web/providers/auth_provider.dart';
 import 'package:flutter_twitter_web/providers/sidemenu_provider.dart';
 import 'package:flutter_twitter_web/providers/categories_provider.dart';
+import 'package:flutter_twitter_web/providers/users_provider.dart';
 
 import 'package:flutter_twitter_web/services/local_storage.dart';
 import 'package:flutter_twitter_web/services/navigation_services.dart';
@@ -32,7 +33,8 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: false),
         ChangeNotifierProvider(create: (_) => SideMenuProvider(), lazy: false),
-        ChangeNotifierProvider(create: (_) => CategoriesProvider())
+        ChangeNotifierProvider(create: (_) => CategoriesProvider()),
+        ChangeNotifierProvider(create: (_) => UsersProvider())
       ],
       child: MyApp(),
     );
