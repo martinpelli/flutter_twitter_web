@@ -23,13 +23,13 @@ class Usuario {
   String toJson() => json.encode(toMap());
 
   factory Usuario.fromMap(Map<String, dynamic> json) => Usuario(
-        rol: json["rol"],
-        estado: json["estado"],
-        google: json["google"],
-        nombre: json["nombre"],
-        correo: json["correo"],
-        uid: json["uid"],
-      );
+      rol: json["rol"],
+      estado: json["estado"],
+      google: json["google"],
+      nombre: json["nombre"],
+      correo: json["correo"],
+      uid: json["uid"],
+      img: json["img"]);
 
   Map<String, dynamic> toMap() => {
         "rol": rol,
@@ -38,5 +38,6 @@ class Usuario {
         "nombre": nombre,
         "correo": correo,
         "uid": uid,
+        "img": img
       };
 }

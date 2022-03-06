@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'providers/providers.dart';
 
 import 'package:flutter_twitter_web/api/CafeApi.dart';
 
@@ -7,12 +8,6 @@ import 'package:flutter_twitter_web/ui/layouts/dashboard/dashboard_layout.dart';
 import 'package:flutter_twitter_web/ui/layouts/splash/splash_layout.dart';
 
 import 'package:flutter_twitter_web/router/router.dart';
-
-import 'package:flutter_twitter_web/providers/auth_provider.dart';
-import 'package:flutter_twitter_web/providers/sidemenu_provider.dart';
-import 'package:flutter_twitter_web/providers/categories_provider.dart';
-import 'package:flutter_twitter_web/providers/users_provider.dart';
-import 'package:flutter_twitter_web/providers/user_form_provider.dart';
 
 import 'package:flutter_twitter_web/services/local_storage.dart';
 import 'package:flutter_twitter_web/services/navigation_services.dart';

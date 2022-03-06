@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_twitter_web/api/CafeApi.dart';
 import 'package:flutter_twitter_web/models/user.dart';
@@ -39,10 +41,22 @@ class UserFormProvider extends ChangeNotifier {
     final data = {'nombre': user!.nombre, 'correo': user!.correo};
 
     try {
-      final response = await CafeApi.httpPut('/usuarios/${user!.uid}', data);
+      await CafeApi.httpPut('/usuarios/${user!.uid}', data);
       return true;
     } catch (error) {
       return false;
+    }
+  }
+
+  Future<Usuario> uploadImage(String path, Uint8List bytes) async {
+    try {
+      final response = await CafeApi.httpUploadFile(path, bytes);
+      user = Usuario.fromMap(response);
+      notifyListeners();
+
+      return user!;
+    } catch (error) {
+      throw 'Error en el user from provider uploadFIle';
     }
   }
 }

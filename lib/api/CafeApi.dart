@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_twitter_web/services/local_storage.dart';
 
@@ -51,6 +53,18 @@ class CafeApi {
       return resp.data;
     } on DioError catch (error) {
       throw ('Error en el Delete: ${error.response}');
+    }
+  }
+
+  static Future httpUploadFile(String path, Uint8List bytes) async {
+    final formData =
+        FormData.fromMap({'archivo': MultipartFile.fromBytes(bytes)});
+
+    try {
+      final resp = await _dio.put(path, data: formData);
+      return resp.data;
+    } on DioError catch (error) {
+      throw ('Error en la carga del Archivo: ${error.response}');
     }
   }
 }
