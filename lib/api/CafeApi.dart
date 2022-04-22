@@ -8,7 +8,7 @@ class CafeApi {
 
   static void configureDio() {
     //Base del url
-    _dio.options.baseUrl = 'http://localhost:8080/api';
+    _dio.options.baseUrl = 'https://flutter-dashboard-admin.herokuapp.com/api';
 
     //Configurar headers
     _dio.options.headers = {
