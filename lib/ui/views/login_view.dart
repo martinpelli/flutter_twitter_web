@@ -47,6 +47,7 @@ class LoginView extends StatelessWidget {
                         ),
                         SizedBox(height: 20),
                         TextFormField(
+                          obscureText: true,
                           onFieldSubmitted: (_) =>
                               {onFormSumbit(loginFormProvider, authProvider)},
                           onChanged: (value) =>
